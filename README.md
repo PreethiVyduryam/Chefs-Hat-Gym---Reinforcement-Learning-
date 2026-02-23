@@ -1,1 +1,1 @@
-# Chef-Hat-s-Gym---Reinforcement-Learning-
+# Chefs-Hat-Gym---Reinforcement-Learning-
