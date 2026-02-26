@@ -1,28 +1,27 @@
 import numpy as np
 
 class BaseOpponent:
-    #"""Default baseline opponent – random valid action."""
+    #Default baseline opponent – random valid action.
     def select_action(self, valid_actions):
         return np.random.choice(valid_actions)
 
 
 class AggressiveOpponent(BaseOpponent):
-    #"""Prefers high-value actions (example heuristic)."""
+    #Prefers high-value actions (example heuristic).
     def select_action(self, valid_actions):
         return max(valid_actions)
 
 
 class PassiveOpponent(BaseOpponent):
-    #"""Prefers low-value actions."""
+    #Prefers low-value actions.
     def select_action(self, valid_actions):
         return min(valid_actions)
 
 
 class OpponentModelWrapper:
-    #"""
     #Wraps the environment and controls opponents' actions.
     #Assumes env.step() receives joint actions [player, opp1, opp2, opp3].
-    #"""
+
     def __init__(self, env, opponent_class=BaseOpponent):
         self.env = env
         self.opponents = [opponent_class(), opponent_class(), opponent_class()]
