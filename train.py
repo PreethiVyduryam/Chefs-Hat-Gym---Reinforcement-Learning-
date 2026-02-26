@@ -13,9 +13,6 @@ def set_seed(seed=42):
 
 set_seed(42)
 
-##############################################
-# PPO NETWORK
-##############################################
 class PPOAgent:
     def __init__(self, state_size, action_size, lr=0.0003, gamma=0.99, clip=0.2):
         self.state_size = state_size
@@ -85,9 +82,6 @@ class PPOAgent:
         self.critic.train_on_batch(states, discounted)
 
 
-##############################################
-# TRAIN LOOP
-##############################################
 def train(episodes=2000):
     env = OpponentModelWrapper(
         gym.make("chefshat-v0"),
