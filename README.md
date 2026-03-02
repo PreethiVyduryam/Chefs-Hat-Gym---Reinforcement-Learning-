@@ -59,12 +59,13 @@ The following experiments were performed during this projwct:
 
 * Demonstrates that modelling opponent behaviour improves strategic adaptation.
 
-* Population-based training
+* includes an actor network to choose actions and a critic network to evaluate states.
 * Self-play dynamics
 * Multi-agent learning
 
-
-The opponent modelling extension was evaluated against a baseline PPO agent. Performance was measured using average reward and win rate. Results indicate whether modelling opponent behaviour improves strategic performance in the Chef’s Hat environment.
+The opponent modelling extension was evaluated against a baseline PPO agent. 
+Performance was measured using average reward and win rate. 
+Results indicate whether modelling opponent behaviour improves strategic performance in the Chef’s Hat environment.
 
 - reset() → returns initial state  
 - step(actions) → returns (next_state, reward, done, info)  
@@ -79,13 +80,13 @@ The agent receives a **10‑dimensional continuous vector** representing abstrac
 - episode progress  
 Since Chef’s Hat is partially observable and high‑dimensional. A compressed numerical state:
 - reduces complexity  
-- stabilises PPO training  
-- follows typical RL design in card-game research  
+- stabilises PPO efficiency 
+
 ### Action Handling Strategy
 - Chef’s Hat is a discrete decision-making game  
-- action masking improves sample efficiency  
+- observes and learns making strategic moves by increasing experience 
 - ensures realistic legality of moves  
-- commonly used in card‑game RL (Poker, Uno, Hearthstone)
+- Opponent modelling extension allows the model to incorporate opponent strategic move observation
 ### Reward Usage
 Rewards used:
 - small step rewards (±0.1) to maintain learning signal  
@@ -103,20 +104,9 @@ The project uses **Proximal Policy Optimisation (PPO)**.
 - integrates cleanly with TensorFlow  
 This makes PPO a well‑justified and academically strong choice.
 
-### Evaluation Metrics
-The agent is evaluated using:
-- **average episode reward**  
-- **win rate approximation**  
-- **reward convergence curves**  
-- **performance across different opponent types**  
-- **stability over multiple episodes**
-Plots and metrics will in case be saved to the 'results/' folder.
 
 ### Limitations, Challenges, and Failure Modes
-- Simplified environment does not include full Chef’s Hat rules  
-- Multi-agent non-stationarity can destabilize policies  
-- PPO is sensitive to learning rate and clipping hyperparameters  
-- Some opponent heuristics are simplified  
-- Reward shaping may bias behaviour  
-- Lack of full observability makes long-term planning difficult  
-These limitations are common in multi-agent RL and are acknowledged in the analysis.
+- version incompatibilities
+- missing modules
+- source code complications
+- inability to meet the deadline due to the training complications
