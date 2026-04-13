@@ -1,275 +1,95 @@
 # Chef’s Hat Gym - Reinforcement Learning Project
 
-## Project Overview
-This project implements a Reinforcement Learning (RL) agent for the Chef’s Hat card game using the Chef’s Hat Gym environment. The goal is to train an intelligent agent capable of learning optimal strategies through self-play and interaction with the environment.
+---
+
+##  Source Code
+
+This repository contains the full source code for a Reinforcement Learning agent trained on the Chef’s Hat Gym environment.
+
+### Included Components:
+- PPO-based Agent (Actor-Critic architecture)
+- Training script (`train.py`)
+- Environment interaction code (`src/`)
+- Opponent modelling extension
+- Utility functions for state processing and action mapping
 
 ---
 
-## Assignment Variant
-Student ID modulo 7 = 1  
-**Variant: Opponent Modelling Extension**
+##  Assignment Variant
 
-This project extends a PPO-based reinforcement learning agent by incorporating opponent behaviour modelling. The agent learns not only from environment rewards but also by interacting with stochastic opponent strategies.
+**Student ID Modulo 7 = 1**
+#### Variant: Opponent Modelling Extension
 
----
-
-## Methodology
-
-### 1. Algorithm Used
-- Proximal Policy Optimization (PPO)
-- Actor-Critic architecture
-
-### 2. State Representation
-The game state is represented as a fixed-length numerical vector derived from:
-- Player’s hand
-- Board/game state
-
-### 3. Action Handling
-- The environment uses discrete string-based actions
-- The PPO agent outputs an action index
-- This index is mapped to valid environment actions dynamically
-
-### 4. Opponent Modelling
-- Opponents use stochastic/random policy
-- This introduces non-stationarity in training
-- Helps improve generalization of the agent
+This project extends a PPO-based reinforcement learning agent by incorporating opponent behaviour modelling. The agent learns not only from environment rewards but also by interacting with stochastic opponent strategies, improving adaptability in a multi-agent environment.
 
 ---
 
-## Training Process
-The agent interacts with the environment over multiple episodes:
-- Collects experiences
-- Updates policy using PPO clipped objective
-- Learns from reward signals
+##  How to Install Dependencies
 
----
+Install all required packages using:
+pip install -r requirements.txt
+
+#### Main Dependencies:
+- TensorFlow / Keras
+- NumPy
+- Gym-style environment (Chef’s Hat Gym)
+
+## How to Run the Code
+
+To train the reinforcement learning agent:
+
+python train.py
+
+####  The training executes as:
+- The game environment is initialized
+- The agent plays multiple rounds of the game
+- It selects actions using a neural network
+- It learns from rewards based on performance
+- Its decision-making gradually improves over time
+
+ ## Experimental Outputs
+
+During training, the following outputs are generated:
+
+### Model Outputs:
+1. agent_actor.h5 → Helps the agent decide which action to take (Actor)
+2. agent_critic.h5 → Helps evaluate game situations (Critic)
+
+### Experiments Conducted
+The following experiments were performed:
+
+1. PPO Agent Training
+Baseline reinforcement learning agent trained using PPO algorithm
+2. Opponent Modelling
+Agents trained against stochastic/random opponents
+Analysis of non-stationary environment effects
+3. Action Mapping Strategy
+Converted environment-specific actions into discrete agent decisions
+4. State Representation Testing
+Flattened observation vectors used for neural network input
 
 ## Results
-- Training loop successfully executed
-- Agent interacts with environment without invalid actions
-- Actor and Critic models are saved as `.h5` files
-
----
+- Agent improves gradually over episodes
+- Performance depends on opponent randomness
+- Stable learning using PPO clipped objective
+  
+- Increasing rewards over episodes indicate learning progress
+- Actor model improves action selection policy
+- Critic model estimates state value accuracy
+- Performance variation occurs due to opponent randomness
 
 ## Limitations
-- Training was limited due to computational constraints
-- Agent was not fully converged
-- Opponent strategy is simplified (random policy)
+- Training time was limited, so the model was not fully optimized
+- Opponent strategies are relatively simple (random-based)
+- More training episodes could improve performance further
+- Reward tuning could be improved for better learning efficiency
 
----
+## Conclusion
 
-## Files in Repository
-- train.py → Training script
-- src/ → Chef’s Hat Gym environment
-- agent_actor.h5 → Trained actor model
-- agent_critic.h5 → Trained critic model
-- requirements.txt → Dependencies
+This project demonstrates how reinforcement learning can be used to train an AI agent to play a complex card game.
 
----
+Instead of following fixed rules, the agent learns through trial and error by interacting with the environment.
 
-## How to Run
-```bash
-pip install -r requirements.txt
-python train.py![Chef's Hat Card Game](gitImages/chefsHatLogo.png)
+The opponent modelling variant makes the task more realistic, as the agent have to adapt to different types of opponents rather than playing against a fixed strategy.
 
-## ChefsHatGym V3
-
-This repository holds the ChefsHatGym environment, which contains all the necessary tools to run, train and evaluate your agents while they play the Chef`s Hat game.
-
-With this library, you will be able to:
-
-* Encapsulate existing agents into the game
-* Run the game locally, on your machine
-* Run the game room as a server
-* Connect agents to a server room and run games
-* Export experimental results, game summaries and agents behavior on a easy-to-read format
-* Evaluate agents using different evaluation tools and visualizations
-
-Full documentation can be found here: [Documentation.](https://chefshatgym.readthedocs.io/en/latest/)
-
-We also provide a list of existing plugins and extensions for this library:
-
-### Chef`s Hat Run
-
-The [Chef’s Hat Run](https://github.com/pablovin/chefsHat_run) is a web interface that allows the setup, follow-up and management of server-based rooms of the Chef\`s Hat. It is ideal to run local experiments with artificial agents, without the need to configure or code anything; To run server rooms and allow remote players to player; And to explore finished games, by using the interative plotting tools to visualize and extract important game statistics.
-
-### Chef`s Hat Players Club
-
-The [Chef’s Hat Player’s Club](https://github.com/pablovin/ChefsHatPlayersClub) is a collection of ready-to-use artificial agents. These agents were implemented, evaluated, and discussed in specific peer-reviewed publications and can be used anytime. If you want your agent to be included in the Player’s Club, message us.
-
-### Chef`s Hat Play
-
-[Chef`s Hat Play](https://github.com/pablovin/ChefsHat_Play) is a Unity interface that allows humans to play the game against other humans or artificial agents.
-
-### Metrics Chef`s Hat
-
-The [Metrics Chef`s Hat](https://github.com/lauratriglia/MetricsChefsHat) package includes the tools for creating different game behavior metrics that help to better understand and describe the agents. Developed and maintained by Laura Triglia.
-
-
-### Nova
-
-[Nova](https://github.com/nathaliarcauas/Nova) is a dynamic game narrator, used to describe and comment on a Chef`s Hat game. Developed and mantained by Nathalia Cauas.
-
-
-### Simulated Games
-
-We also provide a series of simulated games, inside the [Simulated Games.](https://github.com/pablovin/ChefsHatGYM/tree/master/Simulated_Games) folder.
-Each of these games run for 1000 matches, and different combination of agents play them. They are provided as a ready-to-use resource for agent analysis, tools development or better understanding of the Chef`s Hat Simulator as a whole.
-
-
-## The Chef's Hat Card game
-
-![Chef's Hat Card Game](gitImages/cardGame.jpg) 
-
-The Chef's Hat Environment provides a simple and easy-to-use API, based on the OpenAI GYM interface, for implementing, embedding, deploying, and evaluating reinforcement learning agents.
-
-Fora a complete overview on the development of the game, refer to:
-
-- It's Food Fight! Introducing the Chef's Hat Card Game for Affective-Aware HRI (https://arxiv.org/abs/2002.11458)
-- You Were Always on My Mind: Introducing Chef’s Hat and COPPER for Personalized Reinforcement Learning (https://www.frontiersin.org/articles/10.3389/frobt.2021.669990/full)
-- The Chef's Hat rulebook  [The Chef's Hat rulebook.](gitImages/RulebookMenuv08.pdf)
-
-If you want to have access to the game materials (cards and playing field), please contact us using the contact information at the end of the page.
-
-## Chef`sHatGym Simulator
-
-![Chef's Hat Card Game](gitImages/ChefsHat_GYM_-_Example_Random_Agent.gif) 
-
-### Instalation
-
-You can use our pip installation:
-
-```python
-   pip install chefshatgym
-
-```
-Refer to our full [documentation](https://chefshatgym.readthedocs.io/en/latest/) for a complete usage and development guide.
- 
-
-### Running a game locally
-The basic structure of the simulator is a room, that will host four players, and initialize the game.
-ChefsHatGym encapsulates the entire room structure. A local game can be started with a few lines of code:
-
-```python
-import asyncio
-from rooms.room import Room
-from agents.random_agent import RandomAgent
-
-async def main():
-    room = Room(run_remote_room=False, room_name="local_room", max_matches=1)
-
-    players = [RandomAgent(name=f"P{i}", log_directory=room.room_dir) for i in range(4)]
-    for p in players:
-        room.connect_player(p)
-
-    await room.run()
-    print(room.final_scores)
-
-asyncio.run(main())
-```
-
-For a more detailed example, check the [examples folder.](https://github.com/pablovin/ChefsHatGYM/tree/master/examples).
-
-### Running a game remotely
-
-ChefsHatGym can also host a room as a websocket server. Agents running on different machines can join the server and play together.
-
-```python
-# Server
-import asyncio
-from rooms.room import Room
-
-async def main():
-    room = Room(run_remote_room=True, room_name="server_room",
-                room_password="secret", room_port=8765)
-    await room.run()
-
-asyncio.run(main())
-```
-
-Remote agents connect using the `remote_loop` method:
-
-```python
-import asyncio
-from agents.random_agent import RandomAgent
-
-async def main():
-    agent = RandomAgent(
-        "P1",
-        run_remote=True,
-        host="localhost",
-        port=8765,
-        room_name="server_room",
-        room_password="secret",
-    )
-    await agent.remote_loop()
-
-asyncio.run(main())
-```
-
-For complete examples, check the [examples folder.](https://github.com/pablovin/ChefsHatGYM/tree/master/examples)
-
-### Chefs Hat Agents
-
-ChefsHatGym provides an interface to encapsulate agents. It allows the extension of existing agents, but also the creation of new agents. Implementing from this interface allows your agents to be inserted in any Chef`s Hat game run by the simulator.
-
-Running an agent from another machine is supported directly by the agent interface. By enabling `run_remote=True` and calling `remote_loop`, your agent gets all the local and remote functionality and can be used by the Chef`s Hat simulator.
-
-
-Here is an example of an agent that only select random actions:
-* [Random Agent](https://github.com/pablovin/ChefsHatGYM/blob/master/src/agents/random_agent.py)
-
-
-## Legacy Plugins and Extensions
-
- ### Chef's Hat Online (ChefsHatGymV1)
-   ![Plots Example](gitImages/exampleOnline.png)
-   
-The [Chef’s Hat Online](https://github.com/pablovin/ChefsHatOnline) encapsulates the Chef’s Hat Environment and allows a human to play against three agents. The system is built using a web platform, which allows you to deploy it on a web server and run it from any device. The data collected by the Chef’s Hat Online is presented in the same format as the Chef’s Hat Gym, and can be used to train or update agents, but also to leverage human performance.
- 
- ### Moody Framework (ChefsHatGymV1)
- 
-  ![Plots Example](gitImages/MoodPlotsExample.png)
-  
- [Moody Framework]( https://github.com/pablovin/MoodyFramework) is a plugin that endowes each agent with an intrinsic state which is impacted by the agent's
-  own actions. 
- 
-
- ## Use and distribution policy
-
-All the examples in this repository are distributed under a Non-Comercial license. If you use this environment, you have to agree with the following itens:
-
-- To cite our associated references in any of your publication that make any use of these examples.
-- To use the environment for research purpose only.
-- To not provide the environment to any second parties.
-
-## Citations
-
-- Barros, P., Yalçın, Ö. N., Tanevska, A., & Sciutti, A. (2023). Incorporating rivalry in reinforcement learning for a competitive game. Neural Computing and Applications, 35(23), 16739-16752.
-
-- Barros, P., & Sciutti, A. (2022). All by Myself: Learning individualized competitive behavior with a contrastive reinforcement learning optimization. Neural Networks, 150, 364-376.
-
-- Barros, P., Yalçın, Ö. N., Tanevska, A., & Sciutti, A. (2022). Incorporating Rivalry in reinforcement learning for a competitive game. Neural Computing and Applications, 1-14.
-
-- Barros, P., Tanevska, A., & Sciutti, A. (2021, January). Learning from learners: Adapting reinforcement learning agents to be competitive in a card game. In 2020 25th International Conference on Pattern Recognition (ICPR) (pp. 2716-2723). IEEE.
-
-- Barros, P., Sciutti, A., Bloem, A. C., Hootsmans, I. M., Opheij, L. M., Toebosch, R. H., & Barakova, E. (2021, March). It's Food Fight! Designing the Chef's Hat Card Game for Affective-Aware HRI. In Companion of the 2021 ACM/IEEE International Conference on Human-Robot Interaction (pp. 524-528).
-
-- Barros, P., Tanevska, A., Cruz, F., & Sciutti, A. (2020, October). Moody Learners-Explaining Competitive Behaviour of Reinforcement Learning Agents. In 2020 Joint IEEE 10th International Conference on Development and Learning and Epigenetic Robotics (ICDL-EpiRob) (pp. 1-8). IEEE.
-
-- Barros, P., Sciutti, A., Bloem, A. C., Hootsmans, I. M., Opheij, L. M., Toebosch, R. H., & Barakova, E. (2021, March). It's food fight! Designing the chef's hat card game for affective-aware HRI. In Companion of the 2021 ACM/IEEE International Conference on Human-Robot Interaction (pp. 524-528).
-
-## Events
-
-### Chef`s Hat Cup: Revenge of the Agent!
-Get more information here: https://www.chefshatcup.poli.br/home
-
-### The First Chef's Hat Cup is online!
-Get more information here: https://www.whisperproject.eu/chefshat#competition
-
-## Contact
-
-Pablo Barros - pablovin@gmail.com
-
-- [Twitter](https://twitter.com/PBarros_br)
-- [Google Scholar](https://scholar.google.com/citations?user=LU9tpkMAAAAJ)
+Overall, the project successfully demonstrates the core ideas of reinforcement learning, PPO, and adaptive decision-making in a game environment.
