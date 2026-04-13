@@ -124,7 +124,7 @@ for ep in range(EPISODES):
 
             else:
                 import random
-
+git push
                 if possible_actions:
                     action = random.choice(possible_actions)
                 else:
